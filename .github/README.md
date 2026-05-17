@@ -18,6 +18,9 @@ I soon realized the need of something universal — this library. It can do ever
 > [!TIP]
 > [Discover programs that use this library](https://github.com/topics/fish-format)
 
+> [!IMPORTANT]
+> See the [documentation](https://drazape.github.io/fish-format "Zensical documentation on GitHub pages") for usage and installation
+
 
 [fish-helpText]: https://github.com/Drazape/fish-helpText "Generate modern help-texts with an intuitive syntax"
 [^edge-exception]: You cannot (uniformally) transform unknown continous existing unformatted data-streams — an edge case — something I have never seen happening
