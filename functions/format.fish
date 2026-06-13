@@ -5,24 +5,56 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
         set --function -- print echo {$output_name}(set_color --dim white):(set_color --reset)
     end
 
-    $argparse --stop-nonopt 'h/help&' -- {$argv}
-    set --erase -- argv[1]
+    $argparse 'h/help&' -- {$subcommand}
 
+    # Root Descriptions
+    set --local -- text_description 'Format the string itself'
+    set --local -- background_description 'Colorize the '(format background yellow 'Background')
+    set --local -- line_description (format line under --color=yellow 'Add')' and '(format line strikethrough 'customize')' lines'
     if set --local --query -- _flag_help
         help-text 'Intuitively format ANSI' \
             --sub-command={
-                'text | Format the string itself',
-                'background | Colorize the background',
-                'line | Add line accessories'
+                'text | '{$text_description},
+                'background | '{$background_description},
+                'line | '{$line_description}
             } \
             --flag='help:h | Show a reference manual for a sub-command'
         return 0
     end
+
+    set --local -- root_subcommand {$argv[2..]}
     switch "$subcommand"
         case text
+            $argparse --stop-nonopt 'h/help&' -- {$root_subcommand}
+            if set --query --local -- _flag_help
+                help-text {$text_description} \
+                    --sub-command={
+                        'color | '(format text color yellow 'Colorize')' the text string',
+                        'bold | Make the text font '(format text bold 'Bold'),
+                        'italics | Make the text font '(format text italics 'Italics')
+                        'dim | Make the text font '(format text dim 'Dim')
+                    }
+                return 0
+            end
         case background
+            $argparse --stop-nonopt 'h/help&' -- {$root_subcommand}
+            if set --query --local -- _flag_help
+                help-text {$background_description} \
+                    --positional='color | Color to use for the background'
+                return 0
+            end
         case line
+            $argparse --stop-nonopt 'h/help&' -- {$root_subcommand}
+            if set --query --local -- _flag_help
+                help-text {$line_description} \
+                    --sub-command={
+                        'under | Underline the text',
+                        'strikethrough | '(format line strikethrough 'Strikethrough')' the string'
+                    }
+                return 0
+            end
         case \*
             $print 'unknown sub-command:' (format text bold (format background --bright red {$argv[1]})) >&2
+            return 1
     end
 end
