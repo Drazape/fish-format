@@ -1,11 +1,11 @@
 function format --description='Intuitively format ANSI' --argument-names=subcommand
     begin
         set --local -- output_name (set_color --dim)(status function)(set_color --reset)
-        set --function -- argparse argparse --name={$output_name}
+        set --function -- argparse{,} --name={$output_name}
         set --function -- print echo {$output_name}(set_color --dim white):(set_color --reset)
     end
 
-    $argparse h/help\& -- {$subcommand}
+    $argparse h/help\& -- {$argv}
 
     # Root Descriptions
     set --local -- text_description 'Format the string itself'
@@ -22,10 +22,10 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
         return 0
     end
 
-    set --local -- root_subcommand {$argv[2..]}
+    set --local -- root_subargs {$argv[2..]}
     switch "$subcommand"
         case text
-            $argparse --stop-nonopt h/help\& -- {$root_subcommand}
+            $argparse --stop-nonopt h/help\& -- {$root_subargs}
             if set --query --local -- _flag_help
                 help-text {$text_description} \
                     --sub-command={
@@ -37,24 +37,28 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                 return 0
             end
 
-            set --local -- text_subcommand {$root_subcommand[2..]}
-            switch "$root_subcommand[1]"
+            switch "$root_subargs[1]"
                 case color
-                case bold
-                case italics
-                case dim
+                    set --local -- color_subargs {$root_subargs[2..]}
+                    set_color (_format_parse-color {$color_subargs[..2]}) # first 2 elements so that it includes the Bright flag — if there — along with the color
+                    echo {$color_subargs}
+                    set_color --reset
+                case bold italics dim
+                    set_color --{$root_subargs[1]}
+                    echo {$root_subargs[2..]}
+                    set_color --reset
                 case \*
-                    $print unknown (format text italics 'Text') sub-command: (format text bold (format background --bright red {$root_subcommand[1]})) >&2
+                    $print unknown (format text italics 'Text') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
             end
         case background
-            $argparse --stop-nonopt h/help\& -- {$root_subcommand}
+            $argparse --stop-nonopt h/help\& -- {$root_subargs}
             if set --query --local -- _flag_help
                 help-text {$background_description} \
                     --positional='color | Color to use for the background'
                 return 0
             end
         case line
-            $argparse --stop-nonopt h/help\& -- {$root_subcommand}
+            $argparse --stop-nonopt h/help\& -- {$root_subargs}
             if set --query --local -- _flag_help
                 help-text {$line_description} \
                     --sub-command={
@@ -64,11 +68,11 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                 return 0
             end
 
-            switch "$root_subcommand[1]"
+            switch "$root_subargs[1]"
                 case under
                 case strikethrough
                 case \*
-                    $print unknown (format text italics 'Line') sub-command: (format text bold (format background --bright red {$root_subcommand[1]})) >&2
+                    $print unknown (format text italics 'Line') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
             end
         case \*
             $print 'unknown sub-command:' (format text bold (format background --bright red {$argv[1]})) >&2
