@@ -29,9 +29,9 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                 help-text {$text_description} \
                     --sub-command={
                         'color | '(format text color yellow 'Colorize')' the text string',
-                        'bold | Make the text font '(format text bold 'Bold'),
-                        'italics | Make the text font '(format text italics 'Italics')
-                        'dim | Make the text font '(format text dim 'Dim')
+                        'bold | '(format text bold 'Bolden')' the text font',
+                        'italics | '(format text italics 'Italicize')' the text font'
+                        'dim | '(format text dim 'Dim')' the text color'
                     }
                 return 0
             end
