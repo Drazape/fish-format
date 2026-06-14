@@ -65,9 +65,17 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                 return 0
             end
 
+            set --local -- line_args {$root_subargs[2..]}
             switch "$root_subargs[1]"
                 case under
+                    $argparse h/help\& c/color=\& b/bright\& -- {$line_args}
+                    set_color --background=(_format_parse-color {$_flag_bright} -- {$_flag_color})
+                    echo {$argv}
+                    set_color --reset
                 case strikethrough
+                    set_color --strikethrough
+                    echo {$line_args}
+                    set_color --reset
                 case \*
                     $print unknown (format text italics 'Line') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
             end
