@@ -40,7 +40,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             switch "$root_subargs[1]"
                 case color
                     set --local -- color_subargs {$root_subargs[2..]}
-                    set_color (_format_parse-color {$color_subargs[..2]}) # first 2 elements so that it includes the Bright flag — if there — along with the color
+                    set_color (_format_parse-color {$color_subargs[..2]} || return {$status}) # first 2 elements so that it includes the Bright flag — if there — along with the color
                     echo {$color_subargs}
                     set_color --reset
                 case bold italics dim
