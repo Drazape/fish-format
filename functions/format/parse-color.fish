@@ -1,5 +1,5 @@
 function _format_parse-color --description='Parse color names for use with `set_color`' --inherit-variable={print,argparse}
-    $argparse --min-args=1 max-args=2 b/bright\& -- {$argv}
+    $argparse --min-args=1 b/bright\& -- {$argv}
     set --query --local -- _flag_bright && set --local -- bright br
 
     set --local -- color {$argv[1]}
@@ -8,5 +8,5 @@ function _format_parse-color --description='Parse color names for use with `set_
         return 10
     end
 
-    echo "$bright"{$color}
+    echo "$bright"{$color} {$argv[2..]}
 end

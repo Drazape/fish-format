@@ -9,13 +9,12 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
 
     # Root Descriptions
     set --local -- text_description 'Format the string itself'
-    set --local -- background_description 'Colorize the '(format background yellow 'Background')
     set --local -- line_description (format line under --color=yellow 'Add')' and '(format line strikethrough 'customize')' lines'
     if set --local --query -- _flag_help
         help-text 'Intuitively format ANSI' \
             --sub-command={
                 'text | '{$text_description},
-                'background | '{$background_description},
+                'background | Modify the '(format background yellow 'Background')' color',
                 'line | '{$line_description}
             } \
             --flag='help:h | Show a reference manual for a sub-command'
@@ -39,9 +38,9 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
 
             switch "$root_subargs[1]"
                 case color
-                    set --local -- color_subargs {$root_subargs[2..]}
-                    set_color (_format_parse-color {$color_subargs[..2]} || return {$status}) # first 2 elements so that it includes the Bright flag — if there — along with the color
-                    echo {$color_subargs}
+                    set --local -- color_subargs (_format_parse-color {$root_subargs[2..]} || return {$status})
+                    set_color {$color_subargs[1]}
+                    echo {$color_subargs[2..]}
                     set_color --reset
                 case bold italics dim
                     set_color --{$root_subargs[1]}
@@ -51,12 +50,10 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                     $print unknown (format text italics 'Text') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
             end
         case background
-            $argparse --stop-nonopt h/help\& -- {$root_subargs}
-            if set --query --local -- _flag_help
-                help-text {$background_description} \
-                    --positional='color | Color to use for the background'
-                return 0
-            end
+            set --local -- background_subargs (_format_parse-color {$root_subargs[2..]})
+            set_color --background={$background_subargs[1]}
+            echo {$background_subargs[2..]}
+            set_color --reset
         case line
             $argparse --stop-nonopt h/help\& -- {$root_subargs}
             if set --query --local -- _flag_help
