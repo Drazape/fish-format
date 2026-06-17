@@ -1,4 +1,4 @@
-function format --description='Intuitively format ANSI' --argument-names=subcommand
+function format --description='Intuitively format ANSI' --argument-names=subcommand --inherit-variable=_format_colors
     begin
         set --local -- output_name (format text dim (status function))
         set --function -- argparse{,} --name={$output_name}
