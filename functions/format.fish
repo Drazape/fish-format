@@ -2,7 +2,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
     begin
         set --local -- output_name (format text dim (status function))
         set --function -- argparse{,} --name={$output_name}
-        set --function -- print echo {$output_name}(format text dim (format text color white ':'))
+        set --function -- print echo -- {$output_name}(format text dim (format text color white ':'))
     end
 
     $argparse h/help\& -- {$argv}
@@ -53,19 +53,19 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                 case color
                     set --local -- color_subargs (parse-color {$root_subargs[2..]} || return {$status})
                     set_color {$color_subargs[1]}
-                    echo {$color_subargs[2..]}
+                    echo -- {$color_subargs[2..]}
                     set_color --reset
                 case bold italics dim
                     set_color --{$root_subargs[1]}
-                    echo {$root_subargs[2..]}
+                    echo -- {$root_subargs[2..]}
                     set_color --reset
                 case \*
                     $print unknown (format text italics 'Text') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
             end
         case background
-            set --local -- background_subargs (parse-color {$root_subargs[2..]})
+            set --local -- background_subargs (parse-color {$root_subargs} || return {$status})
             set_color --background={$background_subargs[1]}
-            echo {$background_subargs[2..]}
+            echo -- {$background_subargs[2..]}
             set_color --reset
         case line
             $argparse --stop-nonopt h/help\& -- {$root_subargs}
@@ -82,12 +82,12 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             switch "$root_subargs[1]"
                 case under
                     $argparse h/help\& c/color=\& b/bright\& -- {$line_args}
-                    set_color --background=(parse-color {$_flag_bright} -- {$_flag_color})
-                    echo {$argv}
+                    set_color --background=(parse-color {$_flag_bright} -- {$_flag_color} || return {$status})
+                    echo -- {$argv}
                     set_color --reset
                 case strikethrough
                     set_color --strikethrough
-                    echo {$line_args}
+                    echo -- {$line_args}
                     set_color --reset
                 case \*
                     $print unknown (format text italics 'Line') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
