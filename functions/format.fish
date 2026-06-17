@@ -43,7 +43,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                     --sub-command={
                         'color | '(format text color yellow 'Colorize')' the text string',
                         'bold | '(format text bold 'Bolden')' the text font',
-                        'italics | '(format text italics 'Italicize')' the text font'
+                        'italics | '(format text italics 'Italicize')' the text font',
                         'dim | '(format text dim 'Dim')' the text color'
                     }
                 return 0
