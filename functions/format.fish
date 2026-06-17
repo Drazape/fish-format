@@ -7,8 +7,9 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
 
     $argparse --stop-nonopt h/help\& -- {$argv}
 
-    function parse-color --description='Parse color names for use with `set_color`' --inherit-variable={print,argparse,_format_colors}
-        $argparse --min-args=1 b/bright\& -- {$argv}
+    function evaluate-color --description='Parse color names for use with `set_color`' --inherit-variable={print,argparse,_format_colors}
+        set --local text {$argv[3..]}
+        $argparse --min-args=1 --ignore-unknown b/bright\& -- {$argv[1..2]}
         set --query --local -- _flag_bright && set --local -- bright br
 
         set --local -- color {$argv[1]}
@@ -17,7 +18,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             return 10
         end
 
-        string repeat 1 "$bright"{$color} {$argv[2..]}
+        string repeat -- 1 "$bright"{$color} {$argv[2]} {$text}
     end
 
     # Root Descriptions
@@ -52,7 +53,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
 
             switch "$root_subargs[1]"
                 case color
-                    set --local -- color_subargs (parse-color {$root_subargs[2..]} || return {$status})
+                    set --local -- color_subargs (evaluate-color {$root_subargs[2..]} || return {$status})
                     set_color {$color_subargs[1]}
                     echo -- {$color_subargs[2..]}
                     set_color --reset
@@ -64,7 +65,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                     $print unknown (format text italics 'Text') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
             end
         case background
-            set --local -- background_subargs (parse-color {$root_subargs} || return {$status})
+            set --local -- background_subargs (evaluate-color {$root_subargs} || return {$status})
             set_color --background={$background_subargs[1]}
             echo -- {$background_subargs[2..]}
             set_color --reset
@@ -93,7 +94,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                         return 0
                     end
                     set --query --local -- _flag_bright && ! set --query --local -- _flag_color && set --local -- _flag_color white # default color
-                    set --query --local -- _flag_color && set --local -- color (parse-color {$_flag_bright} -- {$_flag_color} || return {$status})
+                    set --query --local -- _flag_color && set --local -- color (evaluate-color {$_flag_bright} -- {$_flag_color} || return {$status})
 
                     set_color --underline --underline-color={$color}
                     echo -- {$argv}
