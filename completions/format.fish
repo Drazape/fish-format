@@ -12,6 +12,7 @@ begin
     $subcommand_complete --arguments=text --description='Format the string itself'
     $subcommand_complete --arguments=background --description='Modify the background color'
     $subcommand_complete --arguments=line --description='Add & Customize lines'
+    $subcommand_complete --arguments=url --description='Hyperlink strings'
 end
 
 begin
@@ -21,7 +22,6 @@ begin
             test "$unbase[1]" = text && ! contains -- "$unbase[2]" color bold italics dim
         '
     $text_complete --arguments=color --description='Colorize the text'
-
     $text_complete --arguments=bold --description='Bolden the font'
     $text_complete --arguments=italics --description='Italicize the font'
     $text_complete --arguments=dim --description='Dim the color'

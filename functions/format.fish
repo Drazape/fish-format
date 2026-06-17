@@ -29,6 +29,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                 'text | '{$text_description},
                 'background | Modify the '(format background yellow 'Background')' color',
                 'line | '{$line_description}
+                'url | Hyperlink the string'
             } \
             --flag='help:h | Show a reference manual for a sub-command'
         return 0
@@ -104,6 +105,9 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                 case \*
                     $print unknown (format text italics 'Line') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
             end
+        case url
+            test (count {$root_subargs}) -gt 2 && $print (format text bold 'url'): Expected (format text italics 2) 'arguments; got' (format background red (count {$root_asubargs}))
+            echo -e -- '\e]8;;'"$root_subargs[1]"'\a'{$root_subargs[2..]}'\e]8;;\a'
         case \*
             $print 'unknown sub-command:' (format text bold (format background --bright red {$argv[1]})) >&2
             return 1
