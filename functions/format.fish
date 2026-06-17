@@ -1,8 +1,8 @@
 function format --description='Intuitively format ANSI' --argument-names=subcommand
     begin
-        set --local -- output_name (set_color --dim)(status function)(set_color --reset)
+        set --local -- output_name (format text dim (status function))
         set --function -- argparse{,} --name={$output_name}
-        set --function -- print echo {$output_name}(set_color --dim white):(set_color --reset)
+        set --function -- print echo {$output_name}(format text dim (format text color white ':'))
     end
 
     $argparse h/help\& -- {$argv}
