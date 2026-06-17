@@ -82,7 +82,8 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             switch "$root_subargs[1]"
                 case under
                     $argparse h/help\& c/color=\& b/bright\& -- {$line_args}
-                    set_color --background=(parse-color {$_flag_bright} -- {$_flag_color} || return {$status})
+                    set --query --local -- _flag_color && set --local -- color (parse-color {$_flag_bright} -- {$_flag_color} || return {$status})
+                    set_color --underline --underline-color={$color}
                     echo -- {$argv}
                     set_color --reset
                 case strikethrough
