@@ -5,7 +5,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
         set --function -- print echo -- {$output_name}(format text dim (format text color white ':'))
     end
 
-    $argparse h/help\& -- {$argv}
+    $argparse --stop-nonopt h/help\& -- {$argv}
 
     function parse-color --description='Parse color names for use with `set_color`' --inherit-variable={print,argparse,_format_colors}
         $argparse --min-args=1 b/bright\& -- {$argv}
