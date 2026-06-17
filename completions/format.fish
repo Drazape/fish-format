@@ -54,3 +54,14 @@ begin
     $line_complete --arguments=under --description='Underline the text'
     $line_complete --arguments=strikethrough --description='Strikethrough the string'
 end
+begin
+    function flags-accepted --description='Check if the underline command accepts flags'
+        set --local -- args (commandline --tokens-expanded --current-process --cut-at-cursor)[2..]
+        contains -- -- {$args} && return 1
+        test "$args[1]" = line && test "$args[2]" = under && return 0
+        return 2
+    end
+    set --local -- under_complete {$common_complete} --condition=flags-accepted
+    $under_complete --short-option=c --long-option=color --require-parameter --description='Underline color' --arguments="$_format_colors" --condition='! __fish_seen_argument --short=c --long=color'
+    $under_complete --short-option=b --long-option=bright --description='Brighten the color' --condition='! __fish_seen_argument --short=b --long=bright'
+end

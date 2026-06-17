@@ -72,7 +72,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             if set --query --local -- _flag_help
                 help-text {$line_description} \
                     --sub-command={
-                        'under | Underline the text',
+                        'under | '(format line under Underline)' the text',
                         'strikethrough | '(format line strikethrough 'Strikethrough')' the string'
                     }
                 return 0
@@ -82,8 +82,18 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             switch "$root_subargs[1]"
                 case under
                     $argparse h/help\& c/color=\& b/bright\& -- {$line_args}
+                    if set --query --local -- _flag_help
+                        help-text 'Underline the text string' \
+                            --positional='+String | Piped string to underline' \
+                            --switch='
+                                c:color | Set color of the underline
+                                b:bright | Brighten the underline color
+                            '
+                        return 0
+                    end
                     set --query --local -- _flag_bright && ! set --query --local -- _flag_color && set --local -- _flag_color white # default color
                     set --query --local -- _flag_color && set --local -- color (parse-color {$_flag_bright} -- {$_flag_color} || return {$status})
+
                     set_color --underline --underline-color={$color}
                     echo -- {$argv}
                     set_color --reset
