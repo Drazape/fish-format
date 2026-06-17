@@ -17,7 +17,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             return 10
         end
 
-        echo "$bright"{$color} {$argv[2..]}
+        string repeat 1 "$bright"{$color} {$argv[2..]}
     end
 
     # Root Descriptions
