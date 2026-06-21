@@ -55,20 +55,23 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                 case color
                     set --local -- color_subargs (evaluate-color {$root_subargs[2..]} || return {$status})
                     set_color {$color_subargs[1]}
-                    echo -- {$color_subargs[2..]}
+                    echo -n -- {$color_subargs[2..]}
                     set_color --reset
+                    echo
                 case bold italics dim
                     set_color --{$root_subargs[1]}
-                    echo -- {$root_subargs[2..]}
+                    echo -n -- {$root_subargs[2..]}
                     set_color --reset
+                    echo
                 case \*
                     $print unknown (format text italics 'Text') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
             end
         case background
             set --local -- background_subargs (evaluate-color {$root_subargs} || return {$status})
             set_color --background={$background_subargs[1]}
-            echo -- {$background_subargs[2..]}
+            echo -n -- {$background_subargs[2..]}
             set_color --reset
+            echo
         case line
             $argparse --stop-nonopt h/help\& -- {$root_subargs}
             if set --query --local -- _flag_help
@@ -97,12 +100,14 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                     set --query --local -- _flag_color && set --local -- color (evaluate-color {$_flag_bright} -- {$_flag_color} || return {$status})
 
                     set_color --underline --underline-color={$color}
-                    echo -- {$argv}
+                    echo -n -- {$argv}
                     set_color --reset
+                    echo
                 case strikethrough
                     set_color --strikethrough
-                    echo -- {$line_args}
+                    echo -n -- {$line_args}
                     set_color --reset
+                    echo
                 case \*
                     $print unknown (format text italics 'Line') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
             end
