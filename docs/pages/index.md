@@ -38,7 +38,7 @@ Each time you need to format a string, you first need to make the formatting wit
 Since [Set Color is text-color focused](#text-color-focused){data-preview}, any new functionality needs to be added as new flags.  
 So for underlines, you first need to enable them with one flag (`underline`), and then change it's color with another (`underline-color=`).
 #### Limited
-All ANSI sequences aren't covered. This library additionality includes [formatting options for hypertext](Usage/Sub-Commands/Hyper-Text.md){data-preview}
+All ANSI sequences aren't covered. This library additionality includes [formatting options for hypertext](./Usage/Sub-Commands/Hyper-text.md){data-preview}
 
 !!! example "`set_color` horror"
     This is a help text file from an old, abandoned, learning project of mine 
