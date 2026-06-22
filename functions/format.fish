@@ -114,6 +114,11 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
         case url
             test (count {$root_subargs}) -gt 2 && $print (format text bold 'url'): Expected (format text italics 2) 'arguments; got' (format background red (count {$root_asubargs}))
             echo -e -- '\e]8;;'"$root_subargs[1]"'\a'{$root_subargs[2..]}'\e]8;;\a'
+        case reverse
+            set_color --reverse
+            echo -n {$root_subargs}
+            set_color --reset
+            echo
         case \*
             $print 'unknown sub-command:' (format text bold (format background --bright red {$argv[1]})) >&2
             return 1

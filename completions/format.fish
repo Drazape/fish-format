@@ -13,6 +13,7 @@ begin
     $subcommand_complete --arguments=background --description='Modify the background color'
     $subcommand_complete --arguments=line --description='Add & Customize lines'
     $subcommand_complete --arguments=url --description='Hyperlink strings'
+    $subcommand_complete --arguments=reverse --description='Reverse current formatting'
 end
 
 begin
