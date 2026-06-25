@@ -8,7 +8,7 @@ $common_complete --short-option=h --long-option=help --description='Reference ma
         contains -- "$subcommands[1]" text line && test -z "$subcommands[2]"
     '
 begin
-    set --local -- subcommand_complete {$common_complete} --condition='test (count (commandline -xpc)) -lt 2'
+    set --local -- subcommand_complete {$common_complete} --condition='test (__fish_number_of_cmd_args_wo_opts) -lt 2'
     $subcommand_complete --arguments=text --description='Format the string itself'
     $subcommand_complete --arguments=background --description='Modify the background color'
     $subcommand_complete --arguments=line --description='Add & Customize lines'
