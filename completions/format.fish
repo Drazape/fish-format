@@ -29,7 +29,7 @@ begin
 end
 
 begin # Colors
-    function expects-color --description='Check if `format` expects a color' --inherit-variable=_format_colors
+    function _format_expects-color --description='Check if `format` expects a color' --inherit-variable=_format_colors
         argparse --ignore-unknown b/bright\& -- (commandline --tokens-expanded --current-process --cut-at-cursor)[2..6]
         set --erase -- _flag_b{,right}
         if test "$argv[1]" = text && test "$argv[2]" = color
@@ -43,8 +43,8 @@ begin # Colors
         end
         return 4
     end
-    $common_complete --arguments="$_format_colors" --condition=expects-color
-    $common_complete --short-option=b --long-option=bright --description='Brighten the text color' --condition={expects-color,'! __fish_seen_argument --short=b --long=bright'}
+    $common_complete --arguments="$_format_colors" --condition=_format_expects-color
+    $common_complete --short-option=b --long-option=bright --description='Brighten the text color' --condition={_format_expects-color,'! __fish_seen_argument --short=b --long=bright'}
 end
 
 begin
