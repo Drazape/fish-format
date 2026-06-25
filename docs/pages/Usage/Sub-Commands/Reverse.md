@@ -12,7 +12,15 @@ Swap the background color and text color
 | :-------: | :----: |
 | `reverse` |  None  |
 
-## Usage
-```fish {title="Format" .no-select .no-copy}
-format reverse <string*>
-```
+## Format
+=== "Format"
+    ```fish {title="Format" .no-select .no-copy}
+    format reverse <string*>
+    ```
+=== "`set_color`"
+    ```fish {title="Substitution" .no-select .no-copy}
+    echo "$(set_color --reverse)"<string*>"$(set_color --reset)"
+    ```
+    ```fish {title="Queue" .no-select .no-copy}
+    set_color --reverse; echo <string*>; set_color --reset
+    ```

@@ -15,7 +15,7 @@ Hyperlink the string
 ## Arguments
 1. **URL**: The link to direct to
 
-## Usage
+## Format
 ```fish {title="Format" .no-select .no-copy}
 format url <url> <string*>
 ```

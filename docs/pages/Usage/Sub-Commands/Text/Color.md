@@ -15,7 +15,15 @@ Modify the string color
 ## Arguments
 1. [Color](../../Arguments/Colors.md)
 
-## Usage
-```fish {title="Format" .no-select .no-copy}
-format text <color> <string*>
-```
+## Format
+=== "Format"
+    ```fish {title="Format" .no-select .no-copy}
+    format text <color> (?:`--bright`) <string*>
+    ```
+=== "`set_color`"
+    ```fish {title="Substitution" .no-select .no-copy}
+    echo "$(set_color (?:`br`)<color>)"<string*>"$(set_color --reset)"
+    ```
+    ```fish {title="Queue" .no-select .no-copy}
+    set_color --background=(?:`br`)<color>; echo <string*>; set_color --reset
+    ```

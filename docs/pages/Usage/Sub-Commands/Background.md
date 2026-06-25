@@ -15,7 +15,15 @@ Modify the background color
 ## Arguments
 [Color](../Arguments/Colors.md){data-preview}
 
-## Usage
-```fish {title="Format" .no-select .no-copy}
-format background <color> <string*>
-```
+## Format
+=== "Format"
+    ```fish {title="Format" .no-select .no-copy}
+    format background <color> (?:`--bright`) <string*>
+    ```
+=== "`set_color`"
+    ```fish {title="Substitution" .no-select .no-copy}
+    echo "$(set_color --background=(?:`br`)<color>)"<string*>"$(set_color --reset)"
+    ```
+    ```fish {title="Queue" .no-select .no-copy}
+    set_color --background=(?:`br`)<color>; echo <string*>; set_color --reset
+    ```
