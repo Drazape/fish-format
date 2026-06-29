@@ -30,7 +30,7 @@ Move the directories into your Fish configuration in the home directory (`~/.con
 ##### Script (local)
 This locally installs the program and updates each time it is run
 ```fish {title="curl-to-fish script" .no-select}
-curl -fsSL 'https://raw.githubusercontent.com/Drazape/fish-format/main/install.fish' | run0 fish -NP
+curl -fsSL 'https://raw.githubusercontent.com/Drazape/fish-helpText/main/install.fish' | run0 fish -NP
 ```
 ##### Package Manager
 As of now, no distribution package manager is supported.
