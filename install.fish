@@ -19,7 +19,7 @@ if set --query --local -- remote
     begin
         set --local proj_name fish-format
         # Clone repository to temporary directory
-        set --global -- repository_dir {$proj_name}-XXXXXXXXX
+        set --global -- repository_dir (mktemp -- {$proj_name}-XXXXXXXXX)
         git $clone_repo --filter=blob:none https://github.com/Drazape/{$proj_name}.git "$repository_dir" || return 2
         cd {$repository_dir}
     end

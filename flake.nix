@@ -12,7 +12,7 @@
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         packages = {
           default = self'.packages.fish-format;
-          fish-format = derivation {
+          fish-format = builtins.derivation {
             name = "fish-format";
             inherit system;
             builder = pkgs.lib.getExe pkgs.fish;
