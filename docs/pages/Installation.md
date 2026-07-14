@@ -36,14 +36,12 @@ curl -fsSL 'https://raw.githubusercontent.com/Drazape/fish-helpText/main/install
 As of now, no distribution package manager is supported.
 
 ###### NixOS
-A flake with convenient configuration options is planned.
-
-For now, the installation can be worked around (with automatic updates). This method is not supported and may stop working after an update.
-
 !!! warning "Manual Dependency"
-    You will need to manually install the dependency: [fish-helpText](https://github.com/Drazape/fish-helpText "Generate formatted console help reference texts"){data-preview}
+    You'll need to manually install the [dependencies](#dependencies){data-preview}.
+		!!! info "Future Fish dependencies automation"
+				For the package, a special wrapper for Fish dependencies (planned) needs to be made.
 
-```nix {hl_lines="3 4 5" title="flake.nix"}
+```nix {hl_lines="4" title="flake.nix"}
 {
 	inputs = {
 		…
@@ -59,7 +57,7 @@ For now, the installation can be worked around (with automatic updates). This me
 	};
 }
 ```
-```nix {hl_lines="10" title="Module with the Fish configuration"}
+```nix {hl_lines="5" title="Module with the Fish configuration"}
 { inputs, … }: {
 	…
 	environment.systemPackages = [
