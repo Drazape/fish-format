@@ -29,7 +29,7 @@ Because of this:
 ##### All at once
 Unlike the other Fish commands that nest themselves for further changes, `set_color` makes all the changes together by printing ANSI sequences that come before the string, While still requiring two commands to be used.
 ##### Not self-contained
-Instead of accepting the whole string that needs to be formatted, it mimics the standard ANSI sequences by surrounding the string and seperately genarating sequences with two different commands.
+Instead of accepting the whole string that needs to be formatted, it mimics the standard ANSI sequences by surrounding the string and separately genarating sequences with two different commands.
 ##### Repetitive
 Each time you need to format a string, you first need to make the formatting with `set_color`, followed by an `echo` with the string, with a `set_color --reset`.
 
