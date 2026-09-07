@@ -14,7 +14,7 @@ Though Fish has a built-in command to perform these operations: [`set_color`](ht
 ### Unintuitive
 #### Text Color focused
 Formatting options other than the text color, as suggested by the name, isn't the *main* operation of the program.
-Other formatting options — background, lines — are accessed via flags.
+Other formatting options — background, lines — are accessed with flags.
 #### Vague
 `set_color` works disparately than the other well-designed Fish commands.
 ##### Color for every variant
@@ -23,7 +23,7 @@ Because of this:
 - It is harder to select a color from completions, because there are double the options than their could be
 - Meaning of `brred` is unclear to anyone who doesn't know what `br` stands for.
 
-!!! note "Retains Functionality"
+!!! note "Retains Capabilities"
     This library counters this such that you simply pick the color, and modify the variant with flags—if needed.
 
 ##### All at once
@@ -35,7 +35,7 @@ Each time you need to format a string, you first need to make the formatting wit
 
 ### Inexpandible
 #### Flags
-Since [Set Color is text-color focused](#text-color-focused){data-preview}, any new functionality needs to be added as new flags.  
+Because [Set Color is text-color focused](#text-color-focused){data-preview}, any new functionality needs to be added as new flags.  
 So for underlines, you first need to enable them with one flag (`underline`), and then change it's color with another (`underline-color=`).
 #### Limited
 All ANSI sequences aren't covered. This library additionality includes [formatting options for hypertext](./Usage/Sub-Commands/Hyper-text.md){data-preview}

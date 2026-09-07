@@ -12,8 +12,8 @@ To further modify the formatting of the string, you nest Format commands togethe
 
 !!! example "Blue background with Green text"
     ```fish {title="set_color" .no-select}
-    echo (set_color --background=blue green)foo(set_color --reset)
+    echo (set_color --background=blue green)'<string to format>'(set_color --reset)
     ```
     ```fish {title="Format" .no-select}
-    format background blue (format text color green 'foo')
+    format background blue (format text color green '<string to format>')
     ```
