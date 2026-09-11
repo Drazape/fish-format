@@ -5,8 +5,7 @@ desription: Installation procedure and methods
 ---
 
 # Installation
-## Dependencies
-
+## Dependency
 - [fish-helpText](https://github.com/Drazape/fish-helpText "Generate formatted console help reference texts"){data-preview} (`help-text`)
 
 ## Procedure
@@ -33,13 +32,9 @@ This locally installs the program and updates each time it is run
 curl -fsSL 'https://raw.githubusercontent.com/Drazape/fish-helpText/main/install.fish' | run0 fish -NP
 ```
 ##### Package Manager
-As of now, no distribution package manager is supported.
-
 ###### NixOS
 !!! warning "Manual Dependency"
-    You'll need to manually install the [dependencies](#dependencies){data-preview}.
-		!!! info "Future Fish dependencies automation"
-				For the package, a special wrapper for Fish dependencies (planned) needs to be made.
+    You'll need to manually install the cyclic [dependency](#dependency){data-preview}.
 
 ```nix {hl_lines="4" title="flake.nix"}
 {
