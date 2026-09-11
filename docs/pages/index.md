@@ -24,7 +24,7 @@ Because of this:
 - Meaning of `brred` is unclear to anyone who doesn't know what `br` stands for.
 
 !!! note "Retains Capabilities"
-    This library counters this such that you simply pick the color, and modify the variant with flags—if needed.
+    This library counters this design by having you simply pick a color, and modify the variant with flags—if needed.
 
 ##### All at once
 Unlike the other Fish commands that nest themselves for further changes, `set_color` makes all the changes together by printing ANSI sequences that come before the string, While still requiring two commands to be used.
