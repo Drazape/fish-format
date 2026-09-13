@@ -22,7 +22,7 @@ to the appropriate paths in the host system, depending on the installation type.
 Auto-updates from the package manager  
 [**Fisher**](https://github.com/jorgebucaran/fisher "Fish plugin manager"){data-preview}: `#!fish fisher install Drazape/fish-format`
 #### Manual
-Move the directories into your Fish configuration in the home directory (`~/.config/fish/`):
+Move the directories into your Fish configuration in the home directory (`~/.config/fish/`)
 
 ### System
 #### Automatic
