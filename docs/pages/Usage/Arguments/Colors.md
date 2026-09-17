@@ -44,6 +44,18 @@ Variants can only be used beside the used color. If it is used elsewhere, then i
 | Bright | `--bright` |  `-b` | Appends `br` to the color, and passes it to `set_color` |
 
 ## Usage
-```fish {title="Format" .no-select .no-copy}
-format <sub-command> (0?:`--bright`) <color> (0?:`--bright`) <string*>
-```
+=== "Format"
+    ```fish {title="Command" .no-select .no-copy}
+    format <sub-command> (0?:`--bright`) <color> (0?:`--bright`) <string*>
+    ```
+=== "`set_color`"
+    ```fish {title="Queue" .no-select .no-copy}
+    set_color (?:br)<color>
+    echo -n -- <string*>
+    set_color --reset
+    ```
+    ```fish {title="Substitution" .no-select .no-copy}
+    echo (set_color (?:br)<color>
+        )'<string>'(
+        set_color --reset)
+    ```

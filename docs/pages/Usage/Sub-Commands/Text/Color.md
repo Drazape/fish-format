@@ -21,9 +21,13 @@ Modify the string color
     format text <color> (?:`--bright`) <string*>
     ```
 === "`set_color`"
-    ```fish {title="Substitution" .no-select .no-copy}
-    echo "$(set_color (?:`br`)<color>)"<string*>"$(set_color --reset)"
-    ```
     ```fish {title="Queue" .no-select .no-copy}
-    set_color --background=(?:`br`)<color>; echo <string*>; set_color --reset
+    set_color --background=(?:`br`)<color>
+    echo -n -- <string*>
+    set_color --reset
+    ```
+    ```fish {title="Substitution" .no-select .no-copy}
+    echo "$(set_color (?:`br`)<color>
+        )"<string*>"$(
+        set_color --reset)"
     ```

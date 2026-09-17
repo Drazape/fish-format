@@ -18,9 +18,13 @@ Strikethrough the string with a line
     format line strikethrough <string*>
     ```
 === "`set_color`"
-    ```fish {title="Substitution" .no-select .no-copy}
-    echo "$(set_color --strikethrough)"<string*>"$(set_color --reset)"
-    ```
     ```fish {title="Queue" .no-select .no-copy}
-    set_color --strikethrough; echo <string*>; set_color --reset
+    set_color --strikethrough
+    echo -n -- <string*>
+    set_color --reset
+    ```
+    ```fish {title="Substitution" .no-select .no-copy}
+    echo "$(set_color --strikethrough
+        )"<string*>"$(
+        set_color --reset)"
     ```

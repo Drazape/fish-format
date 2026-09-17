@@ -18,9 +18,13 @@ Swap the background color and text color
     format reverse <string*>
     ```
 === "`set_color`"
-    ```fish {title="Substitution" .no-select .no-copy}
-    echo "$(set_color --reverse)"<string*>"$(set_color --reset)"
-    ```
     ```fish {title="Queue" .no-select .no-copy}
-    set_color --reverse; echo <string*>; set_color --reset
+    set_color --reverse
+    echo -n -- <string*>
+    set_color --reset
+    ```
+    ```fish {title="Substitution" .no-select .no-copy}
+    echo "$(set_color --reverse
+        )"<string*>"$(
+        set_color --reset)"
     ```

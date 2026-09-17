@@ -18,9 +18,13 @@ Bolden the string
     format text bold <string*>
     ```
 === "`set_color`"
-    ```fish {title="Substitution" .no-select .no-copy}
-    echo "$(set_color --bold)"<string*>"$(set_color --reset)"
-    ```
     ```fish {title="Queue" .no-select .no-copy}
-    set_color --bold; echo <string*>; set_color --reset
+    set_color --bold
+    echo -n -- <string*>
+    set_color --reset
+    ```
+    ```fish {title="Substitution" .no-select .no-copy}
+    echo "$(set_color --bold
+        )"<string*>"$(
+        set_color --reset)"
     ```
