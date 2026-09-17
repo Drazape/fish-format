@@ -47,4 +47,4 @@ All ANSI sequences aren't covered. This library additionality includes [formatti
 All of these issues are solved in this library.
 
 Head over to [Usage](./Usage/){data-preview} to learn how to use the library (with examples from `set_color` alongside).  
-See [Tips](./Tips/) to learn clever ways of using the library.
+See [Guides](./Guides/) to learn clever ways of using the library.
