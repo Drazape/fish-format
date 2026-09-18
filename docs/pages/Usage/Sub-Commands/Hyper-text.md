@@ -7,6 +7,9 @@ description: Hyperlink strings
 # Hyper-text
 Hyperlink the string
 
+!!! note "Exclusive to *Format*"
+    There is no equivalent supported in `set_color` for this ANSI sequence
+
 ## Properties
 |  Name | Parent |
 | :---: | :----: |
