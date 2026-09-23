@@ -27,7 +27,7 @@ This is more convenient because of the following reasons:
     This library counters this design by having you simply pick a color, and modify the variant with flags—if needed.
 
 ##### All at once
-Unlike the other Fish commands that nest themselves for further changes, `set_color` makes all the changes together by printing ANSI sequences that come before the string, While still requiring two commands to be used.
+Unlike the other Fish commands that nest themselves for further changes, `set_color` makes all the changes together by printing ANSI sequences that come before the string, while still requiring two commands to be used.
 ##### Not self-contained
 Instead of accepting the whole string that needs to be formatted, it mimics the standard ANSI sequences by surrounding the string and separately genarating sequences with two different commands.
 ##### Repetitive
