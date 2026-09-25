@@ -4,7 +4,7 @@ begin
     $common_complete
     $common_complete --short-option=h --long-option=help --description='Reference manuals' \
         --condition='
-        set --local -- subcommands (commandline --tokens-expanded --current-process --cut-at-cursor)[2..3]
+        set --local -- subcommands (__fish_print_cmd_args_without_options)[2..3]
         test -z "$subcommands" ||
         contains -- "$subcommands[1]" text line && test -z "$subcommands[2]"
     '
@@ -20,7 +20,7 @@ begin
     begin
         set --local -- text_complete {$common_complete} \
             --condition='
-            set --local -- unbase (commandline --tokens-expanded --current-process --cut-at-cursor)[2..3]
+            set --local -- unbase (__fish_print_cmd_args_without_options)[2..3]
             test "$unbase[1]" = text && ! contains -- "$unbase[2]" color bold italics dim
         '
         $text_complete --arguments=color --description='Colorize the text'
@@ -31,7 +31,7 @@ begin
 
     begin # Colors
         function _format_expects-color --description='Check if `format` expects a color' --inherit-variable=_format_colors
-            argparse --ignore-unknown b/bright\& -- (commandline --tokens-expanded --current-process --cut-at-cursor)[2..6]
+            argparse --ignore-unknown b/bright\& -- (__fish_print_cmd_args_without_options)[2..6]
             set --erase -- _flag_b{,right}
             if test "$argv[1]" = text && test "$argv[2]" = color
                 test (count {$argv}) -eq 2 && return 0
@@ -50,7 +50,7 @@ begin
 
     begin
         set --local -- line_complete {$common_complete} --condition='
-            set --local -- args (commandline --tokens-expanded --current-process --cut-at-cursor)[2..3]
+            set --local -- args (__fish_print_cmd_args_without_options)[2..3]
             test (count {$args}) -le 1 && test "$args[1]" = line
         '
         $line_complete --arguments=under --description='Underline the text'
@@ -58,7 +58,7 @@ begin
     end
     begin
         function flags-accepted --description='Check if the underline command accepts flags'
-            set --local -- args (commandline --tokens-expanded --current-process --cut-at-cursor)[2..]
+            set --local -- args (__fish_print_cmd_args_without_options)[2..]
             contains -- -- {$args} && return 1
             test "$args[1]" = line && test "$args[2]" = under && return 0
             return 2
