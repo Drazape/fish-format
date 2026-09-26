@@ -8,7 +8,7 @@ I soon realized the need of something universal — this library. It can do ever
 
 # Differences
 No repetition
-:   You don't have to call 3 commands or perform command substitutions just to be able to format something — that too in a ugly way. No echo calls, no color resets, it's all built-in.
+:   You don't have to call 3 commands or perform command substitutions just to be able to format something — that too in a ugly way. No echo calls, no color resets, it's all built-in.
 
 Sub-commands
 :   everything here is a sub-command; this library is for formatting, not "coloring". Everything is treated equally, not hidden behind repetitive switches. 
