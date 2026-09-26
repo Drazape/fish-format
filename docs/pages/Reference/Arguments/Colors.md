@@ -17,7 +17,10 @@ The color to change to.
 2. [Background](../Sub-Commands/Background.md){data-preview}
 
 ## Choices
+Following are the ways you can choose the exact color you need
 ### Colors
+You can select one of the following colors:
+
 1. Black
 2. Blue
 3. Cyan
