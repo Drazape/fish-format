@@ -21,8 +21,11 @@ Other formatting options — background, lines — are accessed with flags.
 ##### Color for every variant
 `set_color` has a *bright* variant as a color option for every color it offers.
 This is more convenient because of the following reasons:
-- **Doubled Clutter**: It is harder to select a color from completions, because there are double the options than their could be
-- **Unclear**: Meaning of `brred` is unclear to anyone who doesn't know what `br` stands for.
+Doubled Clutter
+:   It is harder to select a color from completions, because there are double the options than their could be
+
+Unclear
+:   Meaning of `brred` is unclear to anyone who doesn't know what `br` stands for.
 
 !!! note "Retains Capabilities"
     This library counters this design by having you simply pick a color, and modify the variant with flags—if needed.
