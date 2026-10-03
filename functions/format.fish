@@ -29,7 +29,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             --sub-command={
                 'text | '{$text_description},
                 'background | Modify the '(format background yellow 'Background')' color',
-                'line | '{$line_description}
+                'line | '{$line_description},
                 'url | Hyperlink the string'
             } \
             --flag='help:h | Show a reference manual for a sub-command'
@@ -87,10 +87,10 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                     if set --query --local -- _flag_help
                         help-text 'Underline the text string' \
                             --positional='+String | Piped string to underline' \
-                            --switch='
-                                c:color | Set color of the underline
-                                b:bright | Brighten the underline color
-                            '
+                            --flag={
+                                'color:c | Set color of the underline',
+                                'bright:b | Brighten the underline color'
+                            }
                         return 0
                     end
                     set --query --local -- _flag_bright && ! set --query --local -- _flag_color && set --local -- _flag_color white # default color
