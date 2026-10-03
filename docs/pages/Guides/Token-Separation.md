@@ -42,14 +42,14 @@ Following are guides on how to separate tokens with different sorts of strings
 To separate a string with a new line, you can simply use `format` without piping its output.
 !!! example
     ```fish {title"Single"}
-    format line under 'first-word second-word'
+    format line under white 'first-word second-word'
     ```
     > ^^first-word second-word^^
 
     ---
 
     ```fish {title="Multiple"}
-    format line under 'first line' 'second line'
+    format line under white 'first line' 'second line'
     ```
     > ^^first line^^  
     > ^^second line^^

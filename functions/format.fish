@@ -74,7 +74,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             if set --query --local -- _flag_help
                 help-text {$line_description} \
                     --sub-command={
-                        'under | '(format line under Underline)' the text',
+                        'under | '(format line under white 'Underline')' the text',
                         'strikethrough | '(format line strikethrough 'Strikethrough')' the string'
                     }
                 return 0
@@ -83,21 +83,9 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             set --local -- line_args {$root_subargs[2..]}
             switch "$root_subargs[1]"
                 case under
-                    $argparse h/help\& c/color=\& b/bright\& -- {$line_args}
-                    if set --query --local -- _flag_help
-                        help-text 'Underline the text string' \
-                            --positional='+String | Piped string to underline' \
-                            --flag={
-                                'color:c | Set color of the underline',
-                                'bright:b | Brighten the underline color'
-                            }
-                        return 0
-                    end
-                    set --query --local -- _flag_bright && ! set --query --local -- _flag_color && set --local -- _flag_color white # default color
-                    set --query --local -- _flag_color && set --local -- color (evaluate-color {$_flag_bright} -- {$_flag_color} || return {$status})
-
-                    string repeat -- 1 (set_color --underline --underline-color={$color}
-                        ){$argv}(
+                    set --local -- color_subargs (evaluate-color {$line_args} || return {$status})
+                    string repeat -- 1 (set_color --underline --underline-color={$color_subargs[1]}
+                        ){$color_subargs[2..]}(
                         set_color --reset)
                 case strikethrough
                     string repeat -- 1 (set_color --strikethrough
