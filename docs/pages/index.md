@@ -12,7 +12,7 @@ description: Home Page
 Though Fish has a built-in command to perform these operations: [`set_color`](https://fishshell.com/docs/current/cmds/set_color.html "Fish documentation"){data-preview}, it merely makes the existing sequences readable instead of trying to become the formatting tool by implementing a syntax.
 
 ### Unintuitive
-The user experience provided by `set_color` has room for extensive improvements.
+The user experience provided by `set_color` has room for extensive improvements; following are some of the recognised enhancements:
 #### Text Color focused
 Formatting options other than the text color, as suggested by the name, isn't the *main* operation of the program.
 Other formatting options — background, lines — are accessed with flags.
