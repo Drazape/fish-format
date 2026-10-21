@@ -9,13 +9,6 @@ Miscallanous information on installation of the *fish-format* library.
 ## Dependency
 - [fish-helpText](https://github.com/Drazape/fish-helpText "Generate formatted console help reference texts"){data-preview} (`help-text`)
 
-## Procedure
-The installation involves moving Fish files from the directories
-
-- [`functions`](https://github.com/Drazape/fish-format/tree/main/functions){data-preview} (→ `$fish_function_path`)
-- [`conf.d`](https://github.com/Drazape/fish-format/tree/main/conf.d){data-preview}
-
-to the appropriate paths in the host system, depending on the installation type.
 
 ## Scope
 The installation type determines the availability of the program to users
@@ -78,3 +71,11 @@ Package Manager
 
 Local
 :   Local directory for non-packaged programs
+
+!!! info "Procedure"
+    The installation involves moving Fish files from the directories
+
+    - [`functions`](https://github.com/Drazape/fish-format/tree/main/functions){data-preview} (→ `$fish_function_path`)
+    - [`conf.d`](https://github.com/Drazape/fish-format/tree/main/conf.d){data-preview}
+
+    to the appropriate paths in the host system, depending on the installation type.
