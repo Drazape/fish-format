@@ -7,8 +7,7 @@ desription: Installation procedure and methods
 # Installation
 Miscallanous information on installation of the *fish-format* library.
 ## Dependency
-- [fish-helpText](https://github.com/Drazape/fish-helpText "Generate formatted console help reference texts"){data-preview} (`help-text`)
-
+[fish-helpText](https://github.com/Drazape/fish-helpText "Generate formatted console help reference texts"){data-preview} (`help-text`)
 
 ## Scope
 The installation type determines the availability of the program to users
