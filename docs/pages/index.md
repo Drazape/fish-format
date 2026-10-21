@@ -45,10 +45,6 @@ So for underlines, you first need to enable them with one flag (`underline`), an
 #### Limited
 All ANSI sequences aren't covered. This library additionality includes [formatting options for hypertext](./Reference/Sub-Commands/Hyper-text.md){data-preview}
 
-!!! example "`set_color` horror"
-    This is a help text file from an old, abandoned, learning project of mine 
-    [View File](https://github.com/Drazape/SymP/blob/main/src/lib/arg/switch/indi/help-text.fish "A real, abandoned, program (made for learning only) setting an example"){ .md-button .md-button--primary }
-
 All of these issues are solved in this library.
 
 Head over to [Reference](./Reference/){data-preview} to learn how to use the library (with examples from `set_color` alongside).  
