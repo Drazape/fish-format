@@ -1,11 +1,11 @@
 ---
 comments: true
 icon: lucide/download
-desription: Installation procedure and methods
+description: Installation procedure and methods
 ---
 
 # Installation
-Miscallanous information on installation of the *fish-format* library.
+Miscellaneous information on installation of the *fish-format* library.
 ## Dependency
 [fish-helpText](https://github.com/Drazape/fish-helpText "Generate formatted console help reference texts"){data-preview} (`help-text`)
 

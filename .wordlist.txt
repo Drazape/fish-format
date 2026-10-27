@@ -1,0 +1,14 @@
+helpText
+unintuitive
+lucide
+Bolden
+strikethrough
+Strikethrough
+ccw
+transpiling
+NixOS
+positionals
+codebase
+Zensical
+unformatted
+Unexpandable

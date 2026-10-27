@@ -11,7 +11,7 @@ This does not restrict us from using multiple `format` commands with the same pr
 !!! note "Exceptions"
     ## [Hyper-text](../Reference/Sub-Commands/Hyper-text.md)
     The sub-command accepts fixed positionals; therefore, it would make the command structure complicated if it were to accept multiple tokens.  
-    There also isn't much of a usecase for separation of two hyper-texts, and hence, it doesn't support token separation.
+    There also isn't much of a use case for separation of two hyper-texts, and hence, it doesn't support token separation.
     ## Multi-line outputs
     The token-separation depends on the output spanning multiple-lines.  
     If one of the strings itself have multiple lines, we can no longer distinguish between the different tokens.  

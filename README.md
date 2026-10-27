@@ -2,7 +2,7 @@
 
 # Reason
 I was tired of the [unintuitive, repetitive, vague, limited](https://drazape.github.io/fish-format/#set_color-drawbacks "documentation: Set Color drawbacks") `(set_color --<switches> color) text (set_color --reset)` syntax, and so was born a library to generate Fish help-texts: [fish-helpText][fish-helpText].
-While this covered the most common usecase, [fish-helpText][fish-helpText] isn't the only format to create help texts, and help-texts is not the only place where ANSI formatting is used.  
+While this covered the most common use case, [fish-helpText][fish-helpText] isn't the only format to create help texts, and help-texts is not the only place where ANSI formatting is used.  
 
 I soon realized the need of something universal — this library. It can do everything `set_color` can (and [more](https://drazape.github.io/fish-format/Usage/Sub-Commands/Hyper-text/ "Documentation")), but much more intuitively[^edge-exception], in a way that feels natural.  
 
@@ -23,4 +23,4 @@ I soon realized the need of something universal — this library. It can do ever
 
 
 [fish-helpText]: https://github.com/Drazape/fish-helpText "Generate modern help-texts with an intuitive syntax"
-[^edge-exception]: You cannot (uniformally) transform unknown continous existing unformatted data-streams — an edge case — something I have never seen happening
+[^edge-exception]: You cannot (uniformly) transform unknown continuous existing unformatted data-streams — an edge case — something I have never seen happening

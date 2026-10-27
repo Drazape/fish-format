@@ -33,17 +33,17 @@ Unclear
 ##### All at once
 Unlike the other Fish commands that nest themselves for further changes, `set_color` makes all the changes together by printing ANSI sequences that come before the string, while still requiring two commands to be used.
 ##### Not self-contained
-Instead of accepting the whole string that needs to be formatted, it mimics the standard ANSI sequences by surrounding the string and separately genarating sequences with two different commands.
+Instead of accepting the whole string that needs to be formatted, it mimics the standard ANSI sequences by surrounding the string and separately generating sequences with two different commands.
 ##### Repetitive
 Each time you need to format a string, you first need to make the formatting with `set_color`, followed by an `echo` with the string, with a `set_color --reset`.
 
-### Inexpandible
+### Unexpandable
 The architecture of `set_color` makes it tedious to be expanded upon; the following sections describe how:
 #### Flags
 Because [Set Color is text-color focused](#text-color-focused){data-preview}, any new functionality needs to be added as new flags.  
 So for underlines, you first need to enable them with one flag (`underline`), and then change it's color with another (`underline-color=`).
 #### Limited
-All ANSI sequences aren't covered. This library additionality includes [formatting options for hypertext](./Reference/Sub-Commands/Hyper-text.md){data-preview}
+All ANSI sequences aren't covered. This library additionally includes [formatting options for hypertext](./Reference/Sub-Commands/Hyper-text.md){data-preview}
 
 All of these issues are solved in this library.
 
