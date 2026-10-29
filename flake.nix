@@ -9,18 +9,15 @@
 	outputs = inputs@{ flake-parts, ... }:
 		flake-parts.lib.mkFlake { inherit inputs; } {
 			systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
-			perSystem = { config, self', inputs', pkgs, system, ... }: {
+			perSystem = { self', pkgs, system, ... }: {
 				packages = let pkgName = "fish-format"; in {
 					default = self'.packages.${pkgName};
-					${pkgName} = builtins.derivation {
+					${pkgName} = pkgs.stdenvNoCC.mkDerivation {
 						name = pkgName;
 						inherit system;
 
-						builder = pkgs.lib.getExe pkgs.fish;
-						args = [ "--no-config" "--private" "--" ./install.fish ./. ];
-
-						HOME = "/tmp/"; # Temporary home directory to write history to
-						PATH = pkgs.coreutils+"/bin";
+						src = ./.;
+						installPhase = ''${pkgs.lib.getExe pkgs.fish} --no-config --private -- ${./install.fish} ${./.}'';
 					};
 				};
 			};
