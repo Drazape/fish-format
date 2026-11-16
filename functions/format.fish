@@ -1,8 +1,9 @@
 function format --description='Intuitively format ANSI' --argument-names=subcommand --inherit-variable=_format_colors
+    set --local -- fun_name (status current-function)
     begin
-        set --local -- output_name (format text dim (status current-function))
+        set --local -- output_name ($fun_name text dim {$fun_name})
         set --function -- argparse{,} --name={$output_name}
-        set --function -- print echo -- {$output_name}(format text dim (format text color white :))
+        set --function -- print echo -- {$output_name}($fun_name text dim ($fun_name text color white :))
     end
 
     $argparse --stop-nonopt h/help\& -- {$argv}
@@ -14,7 +15,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
 
         set --local -- color {$argv[1]}
         if ! contains -- {$color} {$_format_colors}
-            $print 'Unknown color name:' (format text bold (format background --bright red {$color})) >&2
+            $print 'Unknown color name:' ($fun_name text bold ($fun_name background --bright red {$color})) >&2
             return 10
         end
 
@@ -28,7 +29,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
         help-text 'Intuitively format ANSI' \
             --sub-command={
                 'text | '{$text_description},
-                'background | Modify the '(format background yellow 'Background')' color',
+                'background | Modify the '($fun_name background yellow 'Background')' color',
                 'line | '{$line_description},
                 'url | Hyperlink the string'
             } \
@@ -43,10 +44,10 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             if set --query --local -- _flag_help
                 help-text {$text_description} \
                     --sub-command={
-                        'color | '(format text color yellow 'Colorize')' the text string',
-                        'bold | '(format text bold 'Bolden')' the text font',
-                        'italics | '(format text italics 'Italicize')' the text font',
-                        'dim | '(format text dim 'Dim')' the text color'
+                        'color | '($fun_name text color yellow 'Colorize')' the text string',
+                        'bold | '($fun_name text bold 'Bolden')' the text font',
+                        'italics | '($fun_name text italics 'Italicize')' the text font',
+                        'dim | '($fun_name text dim 'Dim')' the text color'
                     }
                 return 0
             end
@@ -62,7 +63,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                         ){$root_subargs[2..]}(
                         set_color --reset)
                 case \*
-                    $print unknown (format text italics 'Text') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
+                    $print unknown ($fun_name text italics 'Text') sub-command: ($fun_name text bold ($fun_name background --bright red {$root_subargs[1]})) >&2
             end
         case background
             set --local -- background_subargs (evaluate-color {$root_subargs} || return {$status})
@@ -74,8 +75,8 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             if set --query --local -- _flag_help
                 help-text {$line_description} \
                     --sub-command={
-                        'under | '(format line under white 'Underline')' the text',
-                        'strikethrough | '(format line strikethrough 'Strikethrough')' the string'
+                        'under | '($fun_name line under white 'Underline')' the text',
+                        'strikethrough | '($fun_name line strikethrough 'Strikethrough')' the string'
                     }
                 return 0
             end
@@ -92,17 +93,17 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                         ){$line_args}(
                         set_color --reset)
                 case \*
-                    $print unknown (format text italics 'Line') sub-command: (format text bold (format background --bright red {$root_subargs[1]})) >&2
+                    $print unknown ($fun_name text italics 'Line') sub-command: ($fun_name text bold ($fun_name background --bright red {$root_subargs[1]})) >&2
             end
         case url
-            test (count {$root_subargs}) -gt 2 && $print (format text bold 'url'): Expected (format text italics 2) 'arguments; got' (format background red (count {$root_asubargs}))
+            test (count {$root_subargs}) -gt 2 && $print ($fun_name text bold 'url'): Expected ($fun_name text italics 2) 'arguments; got' ($fun_name background red (count {$root_asubargs}))
             echo -e -- '\e]8;;'"$root_subargs[1]"'\a'{$root_subargs[2..]}'\e]8;;\a'
         case reverse
             string repeat -- 1 (set_color --reverse
                 ){$root_subargs}(
                 set_color --reset)
         case \*
-            $print 'unknown sub-command:' (format text bold (format background --bright red {$argv[1]})) >&2
+            $print 'unknown sub-command:' ($fun_name text bold ($fun_name background --bright red {$argv[1]})) >&2
             return 1
     end
 end
