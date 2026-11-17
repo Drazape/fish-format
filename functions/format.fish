@@ -1,9 +1,10 @@
 function format --description='Intuitively format ANSI' --argument-names=subcommand --inherit-variable=_format_colors
     set --local -- fun_name (status current-function)
     begin
-        set --local -- output_name ($fun_name text dim {$fun_name})
+        # directly use `set_color` rather than self to avoid infinite recursion
+        set --local -- output_name (set_color --dim)(status current-function)(set_color --reset)
         set --function -- argparse{,} --name={$output_name}
-        set --function -- print echo -- {$output_name}($fun_name text dim ($fun_name text color white :))
+        set --function -- print echo -- {$output_name}(set_color --dim white)':'(set_color --reset)
     end
 
     $argparse --stop-nonopt h/help\& -- {$argv}
@@ -24,7 +25,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
 
     # Root Descriptions
     set --local -- text_description 'Format the string itself'
-    set --local -- line_description 'Add and customize lines'
+    set --local -- line_description ' Add and customize lines'
     if set --local --query -- _flag_help
         help-text 'Intuitively format ANSI' \
             --sub-command={
