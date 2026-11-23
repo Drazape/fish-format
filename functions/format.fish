@@ -1,3 +1,16 @@
+function _format_evaluate-color --no-scope-shadowing --description='Parse color names for use with `set_color`'
+    set --local text {$argv[3..]}
+    $argparse --min-args=1 --ignore-unknown b/bright\& -- {$argv[1..2]}
+    set --query --local -- _flag_bright && set --local -- bright br
+
+    set --local -- color {$argv[1]}
+    if ! contains -- {$color} {$_format_colors}
+        $print 'Unknown color name:' (format text bold (format background --bright red {$color})) >&2
+        return 10
+    end
+
+    string repeat -- 1 "$bright"{$color} {$argv[2]} {$text}
+end
 function format --description='Intuitively format ANSI' --argument-names=subcommand --inherit-variable=_format_colors
     set --local -- fun_name (status current-function)
     begin
@@ -8,20 +21,6 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
     end
 
     $argparse --stop-nonopt h/help\& -- {$argv}
-
-    function evaluate-color --description='Parse color names for use with `set_color`' --inherit-variable={print,argparse,_format_colors}
-        set --local text {$argv[3..]}
-        $argparse --min-args=1 --ignore-unknown b/bright\& -- {$argv[1..2]}
-        set --query --local -- _flag_bright && set --local -- bright br
-
-        set --local -- color {$argv[1]}
-        if ! contains -- {$color} {$_format_colors}
-            $print 'Unknown color name:' ($fun_name text bold ($fun_name background --bright red {$color})) >&2
-            return 10
-        end
-
-        string repeat -- 1 "$bright"{$color} {$argv[2]} {$text}
-    end
 
     # Root Descriptions
     set --local -- text_description 'Format the string itself'
@@ -55,7 +54,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
 
             switch "$root_subargs[1]"
                 case color
-                    set --local -- color_subargs (evaluate-color {$root_subargs[2..]} || return {$status})
+                    set --local -- color_subargs (_format_evaluate-color {$root_subargs[2..]} || return {$status})
                     string repeat -- 1 (set_color {$color_subargs[1]}
                         ){$color_subargs[2..]}(
                         set_color --reset)
@@ -67,7 +66,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
                     $print unknown ($fun_name text italics 'Text') sub-command: ($fun_name text bold ($fun_name background --bright red {$root_subargs[1]})) >&2
             end
         case background
-            set --local -- background_subargs (evaluate-color {$root_subargs} || return {$status})
+            set --local -- background_subargs (_format_evaluate-color {$root_subargs} || return {$status})
             string repeat -- 1 (set_color --background={$background_subargs[1]}
                 ){$background_subargs[2..]}(
                 set_color --reset)
@@ -85,7 +84,7 @@ function format --description='Intuitively format ANSI' --argument-names=subcomm
             set --local -- line_args {$root_subargs[2..]}
             switch "$root_subargs[1]"
                 case under
-                    set --local -- color_subargs (evaluate-color {$line_args} || return {$status})
+                    set --local -- color_subargs (_format_evaluate-color {$line_args} || return {$status})
                     string repeat -- 1 (set_color --underline --underline-color={$color_subargs[1]}
                         ){$color_subargs[2..]}(
                         set_color --reset)
