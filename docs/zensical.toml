@@ -1,9 +1,9 @@
 [project]
-repo_url = "https://github.com/Drazape/fish-format"
-site_name = "fish-format Documentation"
-site_description = "Documentation for the Fish ANSI formatting library: fish-format"
+repo_url = "https://github.com/Drazape/fish-decorate"
+site_name = "fish-decorate utilities mono-documentation"
+site_description = "Documentation for the Fish ANSI formatting library: fish-decorate"
 site_author = "Drazape"
-site_url = "https://Drazape.github.io/fish-format/"
+site_url = "https://Drazape.github.io/fish-decorate/Format/"
 copyright = """
   Copyright &copy; 2026 Drazape –
   <a href="#__consent">Change cookie settings</a>
